@@ -26,7 +26,12 @@ class Effect extends Card {
         this.text = `${increment} the target's ${stat} by ${Math.abs(magnitude)}`
     }
     play(target) {
-        this.stat === "Resilience" ? target.resilience += this.magnitude : target.power +=this.magnitude;
+        if (target instanceof Unit) {
+            this.stat === "Resilience" ? target.resilience += this.magnitude : target.power +=this.magnitude;
+        } else {
+            throw new Error("Target must me a unit!")
+        }
+        
     }
 }
 
